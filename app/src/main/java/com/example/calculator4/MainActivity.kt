@@ -99,7 +99,7 @@ fun Calculator(modifier: Modifier = Modifier) {
     }
 }
 
-fun String.isDecimalNumber(): Boolean {
+fun String.isDecimalNumber(): Boolean { // extension function: An extra method for class String
     try {
         this.toDouble()
         return true
@@ -107,6 +107,15 @@ fun String.isDecimalNumber(): Boolean {
         return false
     }
     //return this.matches(Regex("^\\-?[0-9]+(\\.[0-9]+)?$"))
+}
+
+fun isDouble(number: String): Boolean { // ordinary function
+    try {
+        number.toDouble()
+        return true
+    } catch (e: NumberFormatException) {
+        return false
+    }
 }
 
 @Preview(showBackground = true)
