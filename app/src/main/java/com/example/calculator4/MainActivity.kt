@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,9 +46,10 @@ fun Calculator(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(16.dp)
     ) {
-        var number1Str by remember { mutableStateOf("") }
-        var number2Str by remember { mutableStateOf("") }
+        var number1Str by remember { mutableStateOf("0") }
+        var number2Str by remember { mutableStateOf("0") }
         var result by remember { mutableStateOf("") }
+        var fff by remember { mutableStateOf(false) }
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = number1Str,
@@ -95,7 +97,12 @@ fun Calculator(modifier: Modifier = Modifier) {
                 Text("-")
             }
         }
-        Text(result)
+        if (!number1Str.isDecimalNumber()) {
+            Text(color = Color.Red, text = "Number 1 is not a valid number")
+        } else if (!number2Str.isDecimalNumber()) {
+            Text(color = Color.Red, text = "Number 2 is not a valid number")
+        } else if (result.isNotEmpty())
+            Text(result)
     }
 }
 
